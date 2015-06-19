@@ -1,0 +1,7 @@
+---
+applications:
+- name: trello_webhook
+  memory: 128M
+  instances: 1
+  env:
+    ORCHESTRATE_ENDPOINT: https://api.ctl-uc1-a.orchestrate.io/
