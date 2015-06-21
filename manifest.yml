@@ -5,3 +5,6 @@ applications:
   instances: 1
   env:
     ORCHESTRATE_ENDPOINT: https://api.ctl-uc1-a.orchestrate.io/
+    ORCHESTRATE_COLLECTION_NAME: TrelloData
+    ORCHESTRATE_API_KEY:
+

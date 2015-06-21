@@ -19,7 +19,7 @@ post '/trello_callback/:board_name' do |board_name|
     $stdout.flush
 
     app = Orchestrate::Application.new(ENV["ORCHESTRATE_API_KEY"], ENV["ORCHESTRATE_ENDPOINT"])
-    trello_data = app[:TrelloData]
+    trello_data = app[ENV["ORCHESTRATE_COLLECTION_NAME"]]
     card_obj = trello_data[action_model.card_id]
 
     action_date = action_model.event_date
