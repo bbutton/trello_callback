@@ -1,7 +1,8 @@
 require 'json'
-require 'orchestrate'
 
 require_relative '../models/action_model'
+require_relative '../models/event_processor'
+require_relative '../models/orchestrate_gateway'
 
 post '/trello_callback/:board_name' do |board_name|
   puts "Callback for board #{board_name}"
@@ -18,15 +19,10 @@ post '/trello_callback/:board_name' do |board_name|
     puts "Storing event for card #{action_model.card_id}, type:#{action_model.event_type}, data:#{action_model.event_data}"
     $stdout.flush
 
-    app = Orchestrate::Application.new(ENV["ORCHESTRATE_API_KEY"], ENV["ORCHESTRATE_ENDPOINT"])
-    trello_data = app[ENV["ORCHESTRATE_COLLECTION_NAME"]]
-    card_obj = trello_data[action_model.card_id]
+    orchestrate_gateway = OrchestrateGateway.new(ENV["ORCHESTRATE_API_KEY"], ENV["ORCHESTRATE_ENDPOINT"], ENV["ORCHESTRATE_COLLECTION_NAME"])
+    event_processor = EventProcessor.new(orchestrate_gateway)
+    event_processor.process(action_model)
 
-    action_date = action_model.event_date
-    ruby_date = DateTime.parse(action_date.to_s)
-    iso_8601_date = ruby_date.iso8601
-
-    card_obj.events[:card_actions][iso_8601_date] << action_model.event_data
     puts "Event stored"
     $stdout.flush
 

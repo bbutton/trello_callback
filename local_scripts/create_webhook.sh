@@ -19,4 +19,4 @@ BOARD_ID=$4
 TRELLO_DEV_ID=$5
 TRELLO_TOKEN=$6
 
-curl -H "Content-Type: application/json" -X POST -d "{\"description\":\"Callback for ${WEBHOOK_FRIENDLY_NAME}\", \"callbackURL\":\"https://${WEBHOOK_NAME}.${CLOUDFOUNDRY_URL}/trello_callback/${WEBHOOK_FRIENDLY_NAME}\", \"idModel\":\"${BOARD_ID}\"}"  https://trello.com/1/tokens/${DEV_TOKEN}/webhooks?key=${TRELLO_ID}
+curl -H "Content-Type: application/json" -X POST -d "{\"description\":\"Callback for ${WEBHOOK_FRIENDLY_NAME}\", \"callbackURL\":\"https://${WEBHOOK_NAME}.${CLOUDFOUNDRY_URL}/trello_callback/${WEBHOOK_FRIENDLY_NAME}\", \"idModel\":\"${BOARD_ID}\"}"  https://trello.com/1/tokens/${TRELLO_TOKEN}/webhooks?key=${TRELLO_DEV_ID}

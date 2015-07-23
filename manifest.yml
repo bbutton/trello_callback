@@ -1,6 +1,6 @@
 ---
 applications:
-- name: trello_webhook
+- name: trello_callback
   memory: 128M
   instances: 1
   env:

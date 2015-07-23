@@ -16,6 +16,10 @@ class ActionModel
     @action_json["action"]["data"]["board"]["id"]
   end
 
+  def list_id
+    @action_json["action"]["data"]["list"]["id"]
+  end
+
   def event_data
     @action_json["action"]["data"]
   end
@@ -31,4 +35,13 @@ class ActionModel
   def to_dict
     {id: id, card_id: card_id, board_id: board_id, event_data: event_data, event_type: event_type}
   end
+
+  def card_name
+    @action_json["action"]["data"]["card"]["name"]
+  end
+
+  def card_desc
+    ""
+  end
+
 end
