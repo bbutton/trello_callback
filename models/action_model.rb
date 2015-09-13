@@ -25,7 +25,7 @@ class ActionModel
   end
 
   def event_date
-    DateTime.parse(@action_json["action"]["date"])
+    @action_json["action"]["date"]
   end
 
   def event_type
@@ -33,7 +33,7 @@ class ActionModel
   end
 
   def to_dict
-    {id: id, card_id: card_id, board_id: board_id, event_data: event_data, event_type: event_type}
+    {id: id, :type => event_type, :card_id => card_id, :data => event_data, :date => event_date}
   end
 
   def card_name
