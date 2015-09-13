@@ -9,8 +9,10 @@ class EventProcessor
     case action_model.event_type
       when "createCard"
         @orchestrate_gateway.add_card_to_board(action_model)
-      else
-        @orchestrate_gateway.add_event_to_card(action_model)
+      when "copyCard"
+        @orchestrate_gateway.add_card_to_board(action_model)
     end
+
+    @orchestrate_gateway.add_event_to_card(action_model)
   end
 end
