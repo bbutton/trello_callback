@@ -7,14 +7,14 @@ class OrchestrateGateway
   end
 
   def add_event_to_card(action_model)
-    puts "Trying to get card object for card_id #{action_model.card_id}"
+    puts "Added event to card #{action_model.card_id}"
     card_obj = @trello_data[action_model.card_id]
 
     action_date = action_model.event_date
     ruby_date = DateTime.parse(action_date.to_s)
     iso_8601_date = ruby_date.iso8601
 
-    card_obj.events[:card_actions][iso_8601_date] << action_model.event_data
+    card_obj.events[:card_actions][iso_8601_date] << action_model.to_dict
   end
 
   def add_card_to_board(action_model)
