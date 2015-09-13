@@ -16,7 +16,7 @@ post '/trello_callback/:board_name' do |board_name|
     action_json = JSON.parse(trello_action)
     action_model = ActionModel.new(action_json)
 
-    puts "Storing event for card #{action_model.card_id}, type:#{action_model.event_type}, data:#{action_model.event_data}"
+    puts "Storing event for card #{action_model.card_id}, type:#{action_model.event_type}, data:#{action_model.event_data} date:#{action_model.event_date}"
     $stdout.flush
 
     orchestrate_gateway = OrchestrateGateway.new(ENV["ORCHESTRATE_API_KEY"], ENV["ORCHESTRATE_ENDPOINT"], ENV["ORCHESTRATE_COLLECTION_NAME"])
@@ -30,6 +30,7 @@ post '/trello_callback/:board_name' do |board_name|
   rescue Exception => e
     puts "Exception thrown during processing: #{e.message}"
     puts "Stack track for exception: #{e.backtrace}"
+    $stdout.flush
 
     500
   end
