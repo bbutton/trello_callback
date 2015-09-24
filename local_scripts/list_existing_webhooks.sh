@@ -8,6 +8,6 @@ fi
 TRELLO_DEV_ID=$1
 TRELLO_TOKEN=$2
 
-curl -XGET https://api.trello.com/1/tokens/${TRELLO_TOKEN}/webhooks?key=${TRELLO_DEV_ID}\&token=${TRELLO_TOKEN}
+curl -s -XGET https://api.trello.com/1/tokens/${TRELLO_TOKEN}/webhooks?key=${TRELLO_DEV_ID}\&token=${TRELLO_TOKEN} | jq -c '.[] | {id: .id, desc: .description, board_id: .idModel}'
 
 exit $?
